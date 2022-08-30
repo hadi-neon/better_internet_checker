@@ -37,7 +37,8 @@ class BetterInternetChecker {
   late Timer _timer;
 
   /// Get method to return the stream from stream controller
-  Stream<ConnectionStatus> get onConnectivityChanged => _streamController.stream;
+  Stream<ConnectionStatus> get onConnectivityChanged =>
+      _streamController.stream;
 
   void _init() {
     _streamController
@@ -63,12 +64,12 @@ class BetterInternetChecker {
 
   /// Check for internet and broadcast the result
   Future<void> _checkAndBroadcast() async {
-    final status = await hasConnection;
+    final status = await checkConnection();
     _streamController.add(status);
   }
 
   /// send a request to the gstatic.com domain to check for internet
-  Future<ConnectionStatus> get hasConnection async {
+  Future<ConnectionStatus> checkConnection() async {
     try {
       final uri = Uri.parse(config.url);
       final response = await http.get(uri).timeout(
@@ -84,6 +85,9 @@ class BetterInternetChecker {
       return _currentStatus = ConnectionStatus.disconnected;
     }
   }
+
+  Future<bool> get hasConnection =>
+      checkConnection().then((value) => value == ConnectionStatus.connected);
 
   /// Dispose the stream controller
   Future<void> dispose() async {

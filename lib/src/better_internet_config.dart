@@ -5,9 +5,9 @@ class BetterInternetConfig {
   /// {@macro better_internet_config}
   const BetterInternetConfig({
     this.url = 'https://www.gstatic.com/generate_204',
-    this.timeout = const Duration(seconds: 5),
+    this.timeout = const Duration(seconds: 7),
     this.offlineInterval = const Duration(seconds: 1),
-    this.onlineInterval = const Duration(seconds: 5),
+    this.onlineInterval = const Duration(seconds: 7),
     this.httpSuccessCode = 204,
   });
 
